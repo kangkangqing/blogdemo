@@ -1,0 +1,75 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 4124098 */
+  src: url('iconfont.woff2?t=1687699063392') format('woff2'),
+       url('iconfont.woff?t=1687699063392') format('woff'),
+       url('iconfont.ttf?t=1687699063392') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-pengyou_full:before {
+  content: "\e603";
+}
+
+.icon-wenjianjia:before {
+  content: "\e601";
+}
+
+.icon-24gf-tags3:before {
+  content: "\e886";
+}
+
+.icon-rili:before {
+  content: "\e8b4";
+}
+
+.icon-ku:before {
+  content: "\e626";
+}
+
+.icon-xiaotiqin:before {
+  content: "\e602";
+}
+
+.icon-about:before {
+  content: "\e614";
+}
+
+.icon-wode:before {
+  content: "\e608";
+}
+
+.icon-zuixingengxin:before {
+  content: "\e61e";
+}
+
+.icon-remen:before {
+  content: "\e6c2";
+}
+
+.icon-github-copy:before {
+  content: "\e883";
+}
+
+.icon-weixin:before {
+  content: "\e600";
+}
+
+.icon-QQ:before {
+  content: "\e882";
+}
+
+.icon-gitee-fill-round:before {
+  content: "\e686";
+}
+
+.icon-github:before {
+  content: "\e66f";
+}
+
