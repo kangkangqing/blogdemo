@@ -1,5 +1,6 @@
 <template>
   <div class="contianer">
+<!--    <scanner></scanner>-->
     <div style="margin-top: 10px;display: flex;justify-content: center;">
      <home-left></home-left>
     <home-right></home-right>
@@ -8,10 +9,11 @@
 </template>
 
 <script>
-import homeLeft from "@/components/homeLeft/homeLeft";
-import homeRight from "@/components/homeRight/homeRight";
+import homeLeft from "@/components/home/homeLeft";
+import homeRight from "@/components/home/homeRight";
+import scanner from "@/components/home/scanner";
 export default {
-  components: {homeLeft,homeRight},
+  components: {homeLeft,homeRight,scanner},
   data() {
     return {
     };

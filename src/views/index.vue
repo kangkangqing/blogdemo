@@ -1,30 +1,29 @@
 <template>
   <div>
     <div>
-      <myNav></myNav>
+      <myNav
+          style="
+          width: 90%;
+          margin: 0 auto;
+         border-radius: 20px;
+          "
+      ></myNav>
       <router-view></router-view>
-  </div>
+    </div>
   </div>
 </template>
 
 <script>
 import myNav from "@/components/myNav";
-import home from '@/views/user/home'
-import timeLine from '@/views/user/timeLine'
-import about from '@/views/user/about'
-import mine from '@/views/user/mine'
 export default {
   name: 'index',
   components: {
     myNav,
   },
   data() {
-    return {
-    }
+    return {}
   },
-  methods:{
-
-  }
+  methods: {}
 }
 </script>
 
