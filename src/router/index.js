@@ -54,4 +54,19 @@ const router = new VueRouter({
   mode:"history"
 })
 
+// Route guard
+router.beforeEach((to, from, next) => {
+  const isLoggedIn = localStorage.getItem('token')
+  
+  // Routes that require authentication
+  const requiresAuth = ['mine']
+  
+  if (requiresAuth.includes(to.name) && !isLoggedIn) {
+    // Redirect to login if not authenticated
+    next('/login')
+  } else {
+    next()
+  }
+})
+
 export default router

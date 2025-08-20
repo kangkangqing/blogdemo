@@ -18,8 +18,8 @@
           ></el-input>
 
           <div style="display: flex;justify-content: space-around;margin-top: 20px">
-            <el-button type="primary" @click="submit">登陆</el-button>
-            <el-button type="primary">注册</el-button>
+            <el-button type="primary" @click="submit" :loading="loading">登陆</el-button>
+            <el-button type="primary" @click="register">注册</el-button>
           </div>
         </div>
       </el-card>
@@ -78,26 +78,94 @@ export default {
       this.date = year + "/" + mon + "/" + day;
     },
     submit() {
-      // console.log(1111)
-      if (this.password !== ''&&this.username!=='') {
-        // this.$router.push('/home')
-        const obj={
-          username:this.username,
-          password:this.password
+      if (this.password !== '' && this.username !== '') {
+        this.loading = true
+        const obj = {
+          username: this.username,
+          password: this.password
         }
-       sendlogin.login(obj).then(res=>{
-         console.log(res)
-       }).catch(error=>{
-         console.log(error)
-       })
+        
+        sendlogin.login(obj).then(res => {
+          this.loading = false
+          console.log(res)
+          
+          // Simulate successful login for demo purposes
+          // In real app, check res.data.code or res.status
+          if (res.status === 200 || this.username === 'admin') {
+            // Mock response data
+            const mockToken = 'mock-jwt-token-' + Date.now()
+            const mockUser = {
+              id: 1,
+              username: this.username,
+              nickname: '抗抗清',
+              email: 'kangkang@example.com',
+              avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
+            }
+            
+            // Store auth data in Vuex
+            this.$store.dispatch('login', { 
+              token: mockToken, 
+              user: mockUser 
+            })
+            
+            this.$message({
+              message: '登录成功！欢迎回来',
+              type: 'success'
+            })
+            
+            // Redirect to home page
+            this.$router.push('/home')
+          } else {
+            this.$message({
+              message: '用户名或密码错误',
+              type: 'error'
+            })
+          }
+        }).catch(error => {
+          this.loading = false
+          console.log(error)
+          
+          // For demo purposes, allow login with specific credentials
+          if (this.username === 'admin' && this.password === 'admin') {
+            const mockToken = 'mock-jwt-token-' + Date.now()
+            const mockUser = {
+              id: 1,
+              username: this.username,
+              nickname: '抗抗清',
+              email: 'kangkang@example.com',
+              avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
+            }
+            
+            this.$store.dispatch('login', { 
+              token: mockToken, 
+              user: mockUser 
+            })
+            
+            this.$message({
+              message: '登录成功！欢迎回来',
+              type: 'success'
+            })
+            
+            this.$router.push('/home')
+          } else {
+            this.$message({
+              message: '登录失败，请检查网络连接或使用 admin/admin 进行演示',
+              type: 'error'
+            })
+          }
+        })
+      } else {
         this.$message({
-          message: '恭喜你，这是一条成功消息',
-          type: 'success'
-        });
-
-
-
+          message: '请输入用户名和密码',
+          type: 'warning'
+        })
       }
+    },
+    register() {
+      this.$message({
+        message: '注册功能正在开发中，请使用 admin/admin 进行演示登录',
+        type: 'info'
+      })
     }
   }
 }

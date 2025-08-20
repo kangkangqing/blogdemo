@@ -20,10 +20,21 @@
                 suffix-icon="el-icon-search"
                 style="width: 20%"
                 class="search"
+                @keyup.enter="search"
                 >
       </el-input>
 
-
+      <!-- User Section -->
+      <div style="margin-left: auto; display: flex; align-items: center;">
+        <div v-if="isLoggedIn" style="display: flex; align-items: center; color: #d3d3d4;">
+          <el-avatar :size="30" :src="currentUser.avatar" style="margin-right: 10px;"></el-avatar>
+          <span style="margin-right: 15px;">{{ currentUser.nickname }}</span>
+          <el-button size="mini" @click="goToMine">个人中心</el-button>
+        </div>
+        <div v-else>
+          <el-button size="mini" type="primary" @click="goToLogin">登录</el-button>
+        </div>
+      </div>
 
   </div>
 </template>
@@ -54,11 +65,34 @@ export default {
       ]
     }
   },
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated
+    },
+    currentUser() {
+      return this.$store.getters.currentUser || {}
+    }
+  },
   methods: {
     go(tab) {
       this.$router.push({
         path: tab.url
       })
+    },
+    search() {
+      if (this.keyWords.trim()) {
+        this.$message({
+          message: `搜索: ${this.keyWords}`,
+          type: 'info'
+        })
+        // TODO: Implement search functionality
+      }
+    },
+    goToLogin() {
+      this.$router.push('/login')
+    },
+    goToMine() {
+      this.$router.push('/mine')
     }
   }
 }
