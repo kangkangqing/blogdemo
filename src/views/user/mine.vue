@@ -66,7 +66,12 @@ export default {
       return this.$store.getters.isAuthenticated
     },
     currentUser(){
-      return this.$store.getters.currentUser || {}
+      return this.$store.getters.currentUser || {
+        avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
+        nickname: '用户',
+        username: 'user',
+        email: 'user@example.com'
+      }
     },
     userArticles(){
       // Filter articles by current user

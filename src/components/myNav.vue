@@ -70,7 +70,10 @@ export default {
       return this.$store.getters.isAuthenticated
     },
     currentUser() {
-      return this.$store.getters.currentUser || {}
+      return this.$store.getters.currentUser || {
+        avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
+        nickname: '用户'
+      }
     }
   },
   methods: {
@@ -81,11 +84,18 @@ export default {
     },
     search() {
       if (this.keyWords.trim()) {
+        const results = this.$store.dispatch('searchArticles', this.keyWords)
         this.$message({
-          message: `搜索: ${this.keyWords}`,
-          type: 'info'
+          message: `搜索"${this.keyWords}"完成`,
+          type: 'success'
         })
-        // TODO: Implement search functionality
+        // TODO: Show search results in a dedicated page
+        console.log('搜索结果:', results)
+      } else {
+        this.$message({
+          message: '请输入搜索关键词',
+          type: 'warning'
+        })
       }
     },
     goToLogin() {

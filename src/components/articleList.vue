@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div v-loading="isLoading">
       <el-card :body-style="{ padding: '10px' }" shadow="hover" style="border-radius: 20px;margin-top: 10px" v-for="article in articles" :key="article.id">
         <div style="padding: 14px;">
           <span style="display: flex;justify-content: space-between">{{ article.title }}</span>
@@ -62,6 +62,9 @@ export default {
     },
     totalArticles() {
       return this.$store.getters.allArticles.length
+    },
+    isLoading() {
+      return this.$store.getters.isLoading
     }
   },
   mounted() {

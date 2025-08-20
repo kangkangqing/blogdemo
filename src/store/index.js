@@ -10,14 +10,16 @@ export default new Vuex.Store({
     isLoggedIn: !!localStorage.getItem('token'),
     articles: [],
     categories: [],
-    tags: []
+    tags: [],
+    loading: false
   },
   getters: {
     isAuthenticated: state => state.isLoggedIn,
     currentUser: state => state.user,
     allArticles: state => state.articles,
     allCategories: state => state.categories,
-    allTags: state => state.tags
+    allTags: state => state.tags,
+    isLoading: state => state.loading
   },
   mutations: {
     SET_USER(state, user) {
@@ -46,6 +48,9 @@ export default new Vuex.Store({
     },
     ADD_ARTICLE(state, article) {
       state.articles.unshift(article)
+    },
+    SET_LOADING(state, loading) {
+      state.loading = loading
     }
   },
   actions: {
@@ -55,6 +60,16 @@ export default new Vuex.Store({
     },
     logout({ commit }) {
       commit('LOGOUT')
+    },
+    searchArticles({ state }, keyword) {
+      if (!keyword.trim()) return state.articles
+      
+      return state.articles.filter(article => 
+        article.title.toLowerCase().includes(keyword.toLowerCase()) ||
+        article.content.toLowerCase().includes(keyword.toLowerCase()) ||
+        article.summary.toLowerCase().includes(keyword.toLowerCase()) ||
+        article.tags.some(tag => tag.toLowerCase().includes(keyword.toLowerCase()))
+      )
     },
     fetchArticles({ commit }) {
       // Placeholder for now - will be replaced with API call
